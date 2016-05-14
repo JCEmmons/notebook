@@ -8,6 +8,7 @@ from __future__ import absolute_import, print_function
 
 import datetime
 import errno
+import gettext
 import importlib
 import io
 import json
@@ -108,14 +109,7 @@ jupyter notebook                       # start the notebook
 jupyter notebook --certfile=mycert.pem # use SSL/TLS certificate
 """
 
-DEV_NOTE_NPM = """It looks like you're running the notebook from source.
-If you're working on the Javascript of the notebook, try running
 
-    npm run build:watch
-
-in another terminal window to have the system incrementally
-watch and build the notebook's JavaScript for you, as you make changes.
-"""
 
 #-----------------------------------------------------------------------------
 # Helper functions
@@ -149,17 +143,30 @@ class NotebookWebApplication(web.Application):
                  config_manager, log,
                  base_url, default_url, settings_overrides, jinja_env_options):
 
+        base_dir = os.path.realpath(os.path.join(__file__, '..', '..'))
+
+        # Set up message catalog access
+        trans = gettext.translation('notebook', localedir=os.path.join(base_dir, 'locale'), fallback=True)
+        trans.install()
+
         # If the user is running the notebook in a git directory, make the assumption
         # that this is a dev install and suggest to the developer `npm run build:watch`.
-        base_dir = os.path.realpath(os.path.join(__file__, '..', '..'))
         dev_mode = os.path.exists(os.path.join(base_dir, '.git'))
         if dev_mode:
+            DEV_NOTE_NPM = _("""It looks like you're running the notebook from source.
+If you're working on the Javascript of the notebook, try running
+
+npm run build:watch
+
+in another terminal window to have the system incrementally
+watch and build the notebook's JavaScript for you, as you make changes.
+""")
             log.info(DEV_NOTE_NPM)
 
         settings = self.init_settings(
             ipython_app, kernel_manager, contents_manager,
-            session_manager, kernel_spec_manager, config_manager, log, base_url,
-            default_url, settings_overrides, jinja_env_options)
+            session_manager, kernel_spec_manager, config_manager, log, trans, 
+            base_url, default_url, settings_overrides, jinja_env_options)
         handlers = self.init_handlers(settings)
 
         super(NotebookWebApplication, self).__init__(handlers, **settings)
@@ -167,7 +174,7 @@ class NotebookWebApplication(web.Application):
     def init_settings(self, ipython_app, kernel_manager, contents_manager,
                       session_manager, kernel_spec_manager,
                       config_manager,
-                      log, base_url, default_url, settings_overrides,
+                      log, trans, base_url, default_url, settings_overrides,
                       jinja_env_options=None):
 
         _template_path = settings_overrides.get(
@@ -181,8 +188,8 @@ class NotebookWebApplication(web.Application):
         jenv_opt = {"autoescape": True}
         jenv_opt.update(jinja_env_options if jinja_env_options else {})
 
-        env = Environment(loader=FileSystemLoader(template_path), **jenv_opt)
-        
+        env = Environment(loader=FileSystemLoader(template_path), extensions=['jinja2.ext.i18n'], **jenv_opt)
+        env.install_gettext_translations(trans, newstyle=False)
         sys_info = get_sys_info()
         if sys_info['commit_source'] == 'repository':
             # don't cache (rely on 304) when working from master
@@ -1151,7 +1158,7 @@ class NotebookApp(JupyterApp):
         "Return the current working directory and the server url information"
         info = self.contents_manager.info_string() + "\n"
         info += "%d active kernels \n" % len(self.kernel_manager._kernels)
-        return info + "The Jupyter Notebook is running at: %s" % self.display_url
+        return info + _("The Jupyter Notebook is running at: %s") % self.display_url
 
     def server_info(self):
         """Return a JSONable dict of information about this server."""
