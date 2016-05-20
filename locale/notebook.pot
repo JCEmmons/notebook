@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-13 18:27-0500\n"
+"POT-Creation-Date: 2016-05-19 21:23-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,10 @@ msgstr ""
 #: notebook/notebookapp.py:1161
 #, python-format
 msgid "The Jupyter Notebook is running at: %s"
+msgstr ""
+
+#: notebook/static/tree/js/notebooklist.js:452
+msgid "Click here to rename, delete, etc."
 msgstr ""
 
 #: notebook/templates/tree.html:29

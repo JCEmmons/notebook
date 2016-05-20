@@ -1,4 +1,4 @@
-# English translations for PROJECT.
+# Translations template for PROJECT.
 # Copyright (C) 2016 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-13 18:27-0500\n"
-"PO-Revision-Date: 2016-05-13 22:29-0500\n"
-"Language: en\n"
-"Language-Team: en <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: 2016-05-19 21:27-0500\n"
+"PO-Revision-Date: 2016-05-19 21:27-0500\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"Last-Translator: \n"
 "X-Generator: Poedit 1.8.7\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
 
 #: notebook/notebookapp.py:156
 msgid ""
@@ -29,7 +29,7 @@ msgid ""
 "in another terminal window to have the system incrementally\n"
 "watch and build the notebook's JavaScript for you, as you make changes.\n"
 msgstr ""
-"It looks like you're running the notebook from English source.\n"
+"It looks like you're running the notebook from source.\n"
 "If you're working on the Javascript of the notebook, try running\n"
 "\n"
 "npm run build:watch\n"
@@ -40,8 +40,12 @@ msgstr ""
 #: notebook/notebookapp.py:1161
 #, python-format
 msgid "The Jupyter Notebook is running at: %s"
-msgstr "The Jupyter Notebook is now running at: %s"
+msgstr "The Jupyter Notebook is running at: %s"
+
+#: notebook/static/tree/js/notebooklist.js:452
+msgid "Click here to rename, delete, etc."
+msgstr "Click here to rename, delete, etc."
 
 #: notebook/templates/tree.html:29
 msgid "Select items to perform actions on them."
-msgstr "Select some items to perform actions on them."
+msgstr "Select items to perform actions on them."

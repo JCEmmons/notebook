@@ -7,10 +7,40 @@ define([
     'base/js/dialog',
     'base/js/events',
     'base/js/keyboard',
-    'moment'
-], function(IPython, utils, dialog, events, keyboard, moment) {
+    'moment',
+    'jed'
+], function(IPython, utils, dialog, events, keyboard, moment, Jed) {
     "use strict";
 
+    var nbjson = {
+    		   "domain": "notebook",
+    		   "locale_data": {
+    		      "notebook": {
+    		         "": {
+    		            "domain": "notebook",
+    		            "plural_forms": "nplurals=2; plural=(n != 1);",
+    		            "lang": "de"
+    		         },
+    		         "It looks like you're running the notebook from source.\nIf you're working on the Javascript of the notebook, try running\n\nnpm run build:watch\n\nin another terminal window to have the system incrementally\nwatch and build the notebook's JavaScript for you, as you make changes.\n": [
+    		            "Es sieht wie Sie das Notizbuch von Quellcode ausführen.\nWenn Sie auf das Javascript des Notebooks arbeiten, versuchen Sie laufenden\n\nnpm run build:watch\n\nin einem anderen terminal-Fenster haben das System schrittweise sehen\nund bauen das Notebook JavaScript für Sie, wenn Sie Änderungen vornehmen.\n"
+    		         ],
+    		         "The Jupyter Notebook is running at: %s": [
+    		            "Das Jupyter-Notebook läuft auf: %s"
+    		         ],
+    		         "Click here to rename, delete, etc.": [
+    		            "Umbenennen, löschen usw. Klicken Sie hier."
+    		         ],
+    		         "Select items to perform actions on them.": [
+    		            "Wählen Sie Elemente, um Aktionen auf diese."
+    		         ]
+    		      }
+    		   }
+    		}
+    var i18n = new Jed(nbjson);
+    var _ = function (text) {
+    	return i18n.gettext(text);
+    }
+    
     var NotebookList = function (selector, options) {
         /**
          * Constructor
@@ -426,7 +456,7 @@ define([
         if (selectable !== undefined) {
             checkbox = $('<input/>')
                 .attr('type', 'checkbox')
-                .attr('title', 'Click here to rename, delete, etc.')
+                .attr('title', _('Click here to rename, delete, etc.'))
                 .appendTo(item);
         }
 

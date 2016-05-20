@@ -1,0 +1,24 @@
+{
+   "domain": "notebook",
+   "locale_data": {
+      "notebook": {
+         "": {
+            "domain": "notebook",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "de"
+         },
+         "It looks like you're running the notebook from source.\nIf you're working on the Javascript of the notebook, try running\n\nnpm run build:watch\n\nin another terminal window to have the system incrementally\nwatch and build the notebook's JavaScript for you, as you make changes.\n": [
+            "Es sieht wie Sie das Notizbuch von Quellcode ausführen.\nWenn Sie auf das Javascript des Notebooks arbeiten, versuchen Sie laufenden\n\nnpm run build:watch\n\nin einem anderen terminal-Fenster haben das System schrittweise sehen\nund bauen das Notebook JavaScript für Sie, wenn Sie Änderungen vornehmen.\n"
+         ],
+         "The Jupyter Notebook is running at: %s": [
+            "Das Jupyter-Notebook läuft auf: %s"
+         ],
+         "Click here to rename, delete, etc.": [
+            "Umbenennen, löschen usw. Klicken Sie hier."
+         ],
+         "Select items to perform actions on them.": [
+            "Wählen Sie Elemente, um Aktionen auf diese."
+         ]
+      }
+   }
+}
